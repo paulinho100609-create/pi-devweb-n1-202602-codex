@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | Minha Loja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Logotipo do site">
+        </a>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="sobre.html">Sobre Nós</a>
+
+            <div class="barra-pesquisa">
+                <input
+                    type="text"
+                    id="campoPesquisa"
+                    placeholder="Buscar produtos..."
+                >
+                <button type="button" onclick="pesquisar()">Buscar</button>
+            </div>
+
+            <a href="login.html" id="linkConta">Minha Conta</a>
+
+            <button
+                id="btnSair"
+                onclick="sair()"
+                style="display: none;"
+            >
+                Sair
+            </button>
+
+            <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
+                <img src="img/carrinho.png" alt="Carrinho">
+                <span id="contadorCarrinho">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <div id="mensagem"></div>
+
+    <main class="sobre-container">
+
+        <h1>Sobre Nós</h1>
+
+        <div class="sobre-grid">
+
+            <div class="sobre">
+                <h2>Nossa História</h2>
+
+                <p>
+                    Somos uma empresa dedicada à moda sustentável,
+                    buscando unir inovação e responsabilidade ambiental
+                    para desenvolver roupas que respeitem o meio ambiente.
+                    Nosso objetivo é oferecer peças que proporcionem
+                    conforto, qualidade e consciência ambiental.
+                </p>
+            </div>
+
+            <div class="sobre">
+                <h2>Missão</h2>
+
+                <ul>
+                    <li>Desenvolver roupas sustentáveis.</li>
+                    <li>Combater o aquecimento global.</li>
+                    <li>Conforto e sustentabilidade.</li>
+                </ul>
+            </div>
+
+            <div class="sobre">
+                <h2>Visão</h2>
+
+                <ul>
+                    <li>Migração para roupas sustentáveis.</li>
+                    <li>Estar entre grandes empresas de moda.</li>
+                    <li>Desenvolver novas ideias de roupas.</li>
+                </ul>
+            </div>
+
+            <div class="sobre">
+                <h2>Valores</h2>
+
+                <ul>
+                    <li>Sustentabilidade.</li>
+                    <li>Bem-estar humano.</li>
+                    <li>Compromisso climático.</li>
+                    <li>Durabilidade consciente.</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Minha Loja. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

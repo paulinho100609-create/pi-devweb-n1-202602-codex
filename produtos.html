@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html">
+        <img src="img/logo.png" alt="Logo" width="110">
+    </a>
+
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="produtos.html">Produtos</a>
+        <a href="sobre.html">Sobre Nós</a>
+
+        <div class="barra-pesquisa">
+            <input type="text" id="campoPesquisa"
+                   placeholder="Buscar produtos...">
+            <button type="button" onclick="pesquisar()">Buscar</button>
+        </div>
+
+        <a href="login.html" id="linkConta">Minha Conta</a>
+        <button id="btnSair" onclick="sair()" style="display:none;">Sair</button>
+
+        <a href="carrinho.html" class="link-carrinho">
+            <img src="img/carrinho.png" alt="Carrinho">
+            <span id="contadorCarrinho">0</span>
+        </a>
+    </nav>
+</header>
+
+<main class="pagina-produtos">
+
+    <h1>Nossos Produtos</h1>
+
+    <div class="area-categorias">
+
+        <button id="btnCategorias"
+                class="botao-categorias"
+                type="button"
+                onclick="alternarMenuCategorias()">
+            Categorias
+            <span id="setaCategorias">▼</span>
+        </button>
+
+        <div id="menuCategorias" class="menu-categorias">
+
+            <button type="button" data-categoria="todas"
+                    onclick="selecionarCategoria('todas')">
+                Todas as categorias
+            </button>
+
+            <button type="button" data-categoria="feminino"
+                    onclick="selecionarCategoria('feminino')">
+                Feminino
+            </button>
+
+            <button type="button" data-categoria="masculino"
+                    onclick="selecionarCategoria('masculino')">
+                Masculino
+            </button>
+
+            <button type="button" data-categoria="blusa"
+                    onclick="selecionarCategoria('blusa')">
+                Blusa
+            </button>
+
+            <button type="button" data-categoria="calca"
+                    onclick="selecionarCategoria('calca')">
+                Calça
+            </button>
+
+        </div>
+
+    </div>
+
+    <p id="categoriaSelecionada">
+        Categoria: Todas as categorias
+    </p>
+
+    <p id="resultadoPesquisa"></p>
+
+    <div class="lista-produtos" id="listaProdutos">
+
+        <!-- PRODUTO 1: PRETO E BRANCO -->
+        <div class="produto"
+             data-categorias="feminino blusa"
+             data-cores="preto branco"
+             data-imagem-preto="/img/blusa.fem.preta.jpeg"
+             data-imagem-branco="/img/blusa.fem.branca.jpeg">
+
+            <img src="/img/blusa.fem.preta.jpeg" alt="Produto 1">
+
+            <h3>Produto 1</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 1', 0, 'imagens/produto1.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 2: PRETO E BRANCO -->
+        <div class="produto" 
+             data-categorias="masculino blusa"
+             data-cores="preto branco"
+             data-imagem-preto="/img/blusa.mas.preta.jpeg"
+             data-imagem-branco="/img/blusa.mas.branca.jpeg">
+
+            <img src="img/blusa.mas.preta.jpeg" alt="Produto 2">
+
+            <h3>Produto 2</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 2', 0, 'imagens/produto2.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 3: PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="masculino blusa"
+         data-cores="preto branco"
+         data-imagem-branco="img/blusa.mas.branca.long.jpeg"
+         data-imagem-preto="img/blusa.mas.preta.long.jpeg">
+
+            <img src="img/blusa.mas.preta.long.jpeg" alt="Produto 3">
+
+            <h3>Produto 3</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 3', 0, 'imagens/produto3.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 4: PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="feminino blusa"         
+         data-cores="preto branco"
+         data-imagem-branco="img/blusa.fem.branca.long.jpeg"
+         data-imagem-preto="img/blusa.fem.preta.long.jpeg">
+
+            <img src="img/blusa.fem.preta.long.jpeg" alt="Produto 4">
+
+            <h3>Produto 4</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 4', 0, 'imagens/produto4.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 5: PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="masculino calca"
+         data-cores="preto branco"
+         data-imagem-branco="img/short.cargo.mas.branco.jpeg"
+         data-imagem-preto="img/short.cargo.mas.preto.jpeg">
+>
+
+            <img src="img/short.cargo.mas.preto.jpeg" alt="Produto 5">
+
+            <h3>Produto 5</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 5', 0, 'imagens/produto5.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 6: PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="feminino calca"
+         data-cores="preto branco"
+         data-imagem-branco="img/short.cargo.fem.branco.jpeg"
+         data-imagem-preto="img/short.cargo.fem.preto.jpeg">
+
+            <img src="img/short.cargo.fem.preto.jpeg" alt="Produto 6">
+
+            <h3>Produto 6</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 6', 0, 'imagens/produto6.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 7: PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="feminino calca"
+         data-cores="preto branco"
+         data-imagem-branco="img/calça.cargo.fem.branca.jpeg"
+         data-imagem-preto="img/calça.cargo.fem.preta.jpeg">
+
+            <img src="img/calça.cargo.fem.preta.jpeg" alt="Produto 7">
+
+            <h3>Produto 7</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 7', 0, 'imagens/produto7.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 8:PRETO E BRANCO -->
+        <div class="produto" 
+         data-categorias="masculino calca"
+         data-cores="preto branco"
+         data-imagem-branco="img/calça.cargo.mas.branca.jpeg"
+         data-imagem-preto="img/calça.cargo.mas.preta.jpeg">
+
+            <img src="img/calça.cargo.mas.preta.jpeg" alt="Produto 8">
+
+            <h3>Produto 8</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="opcoes-cores"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 8', 0, 'imagens/produto8.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 9 -->
+        <div class="produto" data-categorias="masculino calca">
+
+            <img src="img/calça.skinny.mas.jpeg" alt="Produto 9">
+
+            <h3>Produto 9</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="vazia"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 9', 0, 'imagens/produto9.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+
+        <!-- PRODUTO 10 -->
+        <div class="produto" data-categorias="feminino calca">
+
+            <img src="img/calça.skinny.fem.jpeg" alt="Produto 9">
+
+            <h3>Produto 9</h3>
+
+            <p class="preco">R$ 00,00</p>
+
+            <div class="vazia"></div>
+
+            <button onclick="adicionarAoCarrinho('Produto 9', 0, 'imagens/produto9.jpg', this)">
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>Todos os direitos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

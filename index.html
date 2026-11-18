@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início | Minha Loja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Logotipo do site">
+        </a>
+
+        <nav>
+
+            <a href="index.html">Início</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="sobre.html">Sobre Nós</a>
+
+            <div class="barra-pesquisa">
+                <input
+                    type="text"
+                    id="campoPesquisa"
+                    placeholder="Buscar produtos..."
+                >
+
+                <button onclick="pesquisar()">Buscar</button>
+            </div>
+
+            <a href="login.html" id="linkConta">Minha Conta</a>
+
+            <button
+                id="btnSair"
+                onclick="sair()"
+                style="display: none;"
+            >
+                Sair
+            </button>
+
+            <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
+                <img src="img/carrinho.png" alt="Carrinho">
+                <span id="contadorCarrinho">0</span>
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MENSAGEM DO USUÁRIO -->
+    <div id="mensagem"></div>
+
+
+    <!-- CARROSSEL -->
+    <section class="carrossel">
+
+        <div class="slide ativo">
+            <img src="img/essenzya.jpg" alt="Destaque 1">
+        </div>
+
+        <div class="slide">
+            <img src="img/criação.essenzya.jpg" alt="Destaque 2">
+        </div>
+
+        <div class="slide">
+            <img src="img/modelo.prin.jpg" alt="Destaque 3">
+        </div>
+
+        <button class="anterior" onclick="mudarSlide(-1)">&#10094;</button>
+        <button class="proximo" onclick="mudarSlide(1)">&#10095;</button>
+
+        <div class="indicadores">
+            <span class="ponto ativo" onclick="irParaSlide(0)"></span>
+            <span class="ponto" onclick="irParaSlide(1)"></span>
+            <span class="ponto" onclick="irParaSlide(2)"></span>
+        </div>
+
+    </section>
+
+
+    <!-- PRODUTOS EM ALTA -->
+    <main>
+
+        <section class="secao-produtos">
+
+            <h1>Produtos em Alta</h1>
+
+            <p class="subtitulo-produtos">
+                Confira alguns dos produtos mais destacados da nossa coleção.
+            </p>
+
+            <div class="lista-produtos">
+
+                <!-- PRODUTO 1 -->
+                <div class="produto">
+
+                    <img
+                        src="img/blusa.mas.preta.jpeg"
+                        alt="Produto 1"
+                    >
+
+                    <h2>Produto 1</h2>
+
+                    <p class="preco">R$ 00,00</p>
+
+                    <button
+                        onclick="adicionarAoCarrinho('Produto 1', 0, 'img/blusa.mas.preta.jpeg')"
+                    >
+                        Adicionar ao carrinho
+                    </button>
+
+                </div>
+
+
+                <!-- PRODUTO 2 -->
+                <div class="produto">
+
+                    <img
+                        src="img/calça.cargo.mas.preta.jpeg"
+                        alt="Produto 2"
+                    >
+
+                    <h2>Produto 2</h2>
+
+                    <p class="preco">R$ 00,00</p>
+
+                    <button
+                        onclick="adicionarAoCarrinho('Produto 2', 0, 'img/calça.cargo.mas.preta.jpeg')"
+                    >
+                        Adicionar ao carrinho
+                    </button>
+
+                </div>
+
+
+                <!-- PRODUTO 3 -->
+                <div class="produto">
+
+                    <img
+                        src="img/calça.cargo.fem.preta.jpeg"
+                        alt="Produto 3"
+                    >
+
+                    <h2>Produto 3</h2>
+
+                    <p class="preco">R$ 00,00</p>
+
+                    <button
+                        onclick="adicionarAoCarrinho('Produto 3', 0, 'img/calça.cargo.fem.preta.jpeg')"
+                    >
+                        Adicionar ao carrinho
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="ver-mais">
+                <a href="produtos.html">Ver todos os produtos</a>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>&copy; 2026 Minha Loja. Todos os direitos reservados.</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
