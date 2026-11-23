@@ -30,7 +30,7 @@
                     placeholder="Buscar produtos..."
                 >
 
-                <button onclick="pesquisar()">Buscar</button>
+                <button type="button" onclick="pesquisar()">Buscar</button>
             </div>
 
             <a href="login.html" id="linkConta">Minha Conta</a>
@@ -98,19 +98,21 @@
             <div class="lista-produtos">
 
                 <!-- PRODUTO 1 -->
-                <div class="produto">
+                <div class="produto"
+                     data-categorias="masculino blusa">
 
                     <img
                         src="img/blusa.mas.preta.jpeg"
-                        alt="Produto 1"
+                        alt="Blusa masculina preta"
                     >
 
-                    <h2>Produto 1</h2>
+                    <h2>Blusa masculina</h2>
 
-                    <p class="preco">R$ 00,00</p>
+                    <p class="preco">R$ 39,99</p>
 
                     <button
-                        onclick="adicionarAoCarrinho('Produto 1', 0, 'img/blusa.mas.preta.jpeg')"
+                        type="button"
+                        onclick="adicionarAoCarrinho('blusa masculina', 39.99, 'img/blusa.mas.preta.jpeg', this)"
                     >
                         Adicionar ao carrinho
                     </button>
@@ -119,19 +121,21 @@
 
 
                 <!-- PRODUTO 2 -->
-                <div class="produto">
+                <div class="produto"
+                     data-categorias="masculino calca">
 
                     <img
                         src="img/calça.cargo.mas.preta.jpeg"
-                        alt="Produto 2"
+                        alt="Calça cargo masculina preta"
                     >
 
-                    <h2>Produto 2</h2>
+                    <h2>Calça cargo masculina</h2>
 
-                    <p class="preco">R$ 00,00</p>
+                    <p class="preco">R$ 90,00</p>
 
                     <button
-                        onclick="adicionarAoCarrinho('Produto 2', 0, 'img/calça.cargo.mas.preta.jpeg')"
+                        type="button"
+                        onclick="adicionarAoCarrinho('Calça cargo masculina', 90, 'img/calça.cargo.mas.preta.jpeg', this)"
                     >
                         Adicionar ao carrinho
                     </button>
@@ -140,19 +144,21 @@
 
 
                 <!-- PRODUTO 3 -->
-                <div class="produto">
+                <div class="produto"
+                     data-categorias="feminino calca">
 
                     <img
-                        src="img/calça.cargo.fem.preta.jpeg"
-                        alt="Produto 3"
+                        src="img/short.cargo.fem.branco.jpeg"
+                        alt="Calça cargo feminina preta"
                     >
 
-                    <h2>Produto 3</h2>
+                    <h2>Short cargo feminino</h2>
 
-                    <p class="preco">R$ 00,00</p>
+                    <p class="preco">R$ 60,00</p>
 
                     <button
-                        onclick="adicionarAoCarrinho('Produto 3', 0, 'img/calça.cargo.fem.preta.jpeg')"
+                        type="button"
+                        onclick="adicionarAoCarrinho('Short cargo feminino', 60, 'img/short.cargo.fem.branco.jpeg', this)"
                     >
                         Adicionar ao carrinho
                     </button>
@@ -173,12 +179,16 @@
     <!-- RODAPÉ -->
     <footer>
 
-        <p>&copy; 2026 Minha Loja. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Essenzya. Todos os direitos reservados.</p>
 
     </footer>
 
 
     <script src="script.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+ <!-- Vlibras -->
+ <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 
 </body>
 

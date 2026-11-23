@@ -1,7 +1,6 @@
 /* =========================
    MODAIS PERSONALIZADOS
 ========================= */
-
 function mostrarModal(titulo, mensagem, aoFechar = null) {
     let modalExistente = document.getElementById("modalPersonalizado");
 
@@ -44,7 +43,6 @@ function mostrarModal(titulo, mensagem, aoFechar = null) {
                 opacity: 0;
                 transform: scale(0.85);
             }
-
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -109,11 +107,13 @@ function mostrarModal(titulo, mensagem, aoFechar = null) {
     botao.focus();
 }
 
+
 /* =========================
    VARIÁVEIS
 ========================= */
 
 let categoriaAtual = "todas";
+
 
 /* =========================
    NORMALIZAR TEXTOS
@@ -126,6 +126,7 @@ function normalizarTexto(texto) {
         .replace(/[\u0300-\u036f]/g, "")
         .trim();
 }
+
 
 /* =========================
    CORES DOS PRODUTOS
@@ -217,6 +218,7 @@ function configurarOpcoesCores() {
     });
 }
 
+
 /* =========================
    SELECIONAR COR DO PRODUTO
 ========================= */
@@ -256,6 +258,7 @@ function selecionarCorProduto(botao, cor) {
     }
 }
 
+
 /* =========================
    ABRIR E FECHAR CATEGORIAS
 ========================= */
@@ -272,6 +275,7 @@ function alternarMenuCategorias() {
         ? "▲"
         : "▼";
 }
+
 
 /* =========================
    SELECIONAR CATEGORIA
@@ -322,6 +326,7 @@ function selecionarCategoria(categoria) {
 
     filtrarProdutos(campo ? campo.value : "");
 }
+
 
 /* =========================
    CADASTRO E LOGIN
@@ -374,6 +379,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     /* LOGIN */
 
     const formLogin = document.getElementById("formLogin");
@@ -411,6 +417,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     /* USUÁRIO LOGADO */
 
     let usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
@@ -432,6 +439,7 @@ document.addEventListener("DOMContentLoaded", function() {
             btnSair.style.display = "block";
         }
     }
+
 
     /* PESQUISA E CATEGORIAS */
 
@@ -499,9 +507,11 @@ document.addEventListener("DOMContentLoaded", function() {
         filtrarProdutos(buscaInicial || "");
     }
 
+
     /* ATIVAR CORES DOS PRODUTOS */
 
     configurarOpcoesCores();
+
 
     /* PESQUISA COM ENTER */
 
@@ -514,6 +524,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+
     /* CARROSSEL AUTOMÁTICO */
 
     const slides = document.querySelectorAll(".slide");
@@ -524,11 +535,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 4000);
     }
 
+
     /* ATUALIZAR CARRINHO */
 
     atualizarContadorCarrinho();
     mostrarCarrinho();
 });
+
 
 /* =========================
    SAIR DA CONTA
@@ -544,6 +557,7 @@ function sair() {
         }
     );
 }
+
 
 /* =========================
    PESQUISA
@@ -576,6 +590,7 @@ function pesquisar() {
     window.location.href =
         "produtos.html?busca=" + encodeURIComponent(pesquisa);
 }
+
 
 /* =========================
    FILTRAR PRODUTOS
@@ -628,6 +643,7 @@ function filtrarProdutos(pesquisa = "") {
     }
 }
 
+
 /* =========================
    IDENTIFICAR USUÁRIO
 ========================= */
@@ -635,6 +651,7 @@ function filtrarProdutos(pesquisa = "") {
 function obterUsuarioLogado() {
     return JSON.parse(localStorage.getItem("usuarioLogado"));
 }
+
 
 /* =========================
    IDENTIFICAR CARRINHO
@@ -648,8 +665,36 @@ function obterChaveCarrinho() {
     return "carrinho_" + usuario.email.toLowerCase();
 }
 
+
+/* =========================
+   IDENTIFICAR COR DO PRODUTO
+========================= */
+
+function identificarCorProduto(produto) {
+
+    // Mantém a cor já registrada.
+    if (produto.cor) {
+        return normalizarTexto(String(produto.cor));
+    }
+
+    // Caso não exista cor registrada, identifica pela imagem.
+    const imagem = normalizarTexto(String(produto.imagem || ""));
+
+    if (imagem.includes("preta") || imagem.includes("preto")) {
+        return "preto";
+    }
+
+    if (imagem.includes("branca") || imagem.includes("branco")) {
+        return "branco";
+    }
+
+    return null;
+}
+
+
 /* =========================
    OBTER PRODUTOS DO CARRINHO
+   AGRUPAR PRODUTOS REPETIDOS
 ========================= */
 
 function obterProdutosCarrinho() {
@@ -657,8 +702,48 @@ function obterProdutosCarrinho() {
 
     if (!chave) return [];
 
-    return JSON.parse(localStorage.getItem(chave)) || [];
+    const produtosSalvos = JSON.parse(localStorage.getItem(chave)) || [];
+
+    const produtosAgrupados = [];
+
+    produtosSalvos.forEach(function(produto) {
+
+        const corIdentificada = identificarCorProduto(produto);
+
+        const nomeNormalizado = normalizarTexto(
+            String(produto.nome || "")
+        );
+
+        const existente = produtosAgrupados.find(function(item) {
+
+            return normalizarTexto(String(item.nome || "")) === nomeNormalizado &&
+                identificarCorProduto(item) === corIdentificada;
+
+        });
+
+        if (existente) {
+
+            existente.quantidade =
+                Number(existente.quantidade || 1) +
+                Number(produto.quantidade || 1);
+
+        } else {
+
+            produtosAgrupados.push({
+                ...produto,
+                cor: corIdentificada,
+                quantidade: Number(produto.quantidade || 1)
+            });
+
+        }
+    });
+
+    // Salva os produtos já agrupados para corrigir duplicações antigas.
+    localStorage.setItem(chave, JSON.stringify(produtosAgrupados));
+
+    return produtosAgrupados;
 }
+
 
 /* =========================
    SALVAR CARRINHO
@@ -674,12 +759,14 @@ function salvarCarrinho(produtos) {
     atualizarContadorCarrinho();
 }
 
+
 /* =========================
    ADICIONAR AO CARRINHO
-   AGORA COM VARIAÇÃO DE COR
+   COM AGRUPAMENTO POR NOME E COR
 ========================= */
 
 function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
+
     const usuario = obterUsuarioLogado();
 
     if (!usuario) {
@@ -694,14 +781,21 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
         return;
     }
 
-    let cor = null;
+    let cor = identificarCorProduto({
+        imagem: imagem,
+        cor: null
+    });
+
     let imagemFinal = imagem;
 
-    // Identifica a cor selecionada no card
+    // Se o botão veio de um produto com opções de cor,
+    // utiliza a cor selecionada pelo usuário.
     if (elemento) {
+
         const card = elemento.closest(".produto");
 
         if (card && card.dataset.cores) {
+
             cor = card.dataset.corSelecionada || null;
 
             if (!cor) {
@@ -723,15 +817,23 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
 
     let produtos = obterProdutosCarrinho();
 
-    // Produtos com cores diferentes são itens diferentes
+    // Procura o mesmo produto com a mesma cor.
     const produtoExistente = produtos.find(function(produto) {
-        return produto.nome === nome &&
-            (produto.cor || null) === cor;
+
+        return normalizarTexto(String(produto.nome || "")) ===
+            normalizarTexto(String(nome || "")) &&
+            identificarCorProduto(produto) === cor;
+
     });
 
     if (produtoExistente) {
+
+        // Se já existe, aumenta a quantidade.
         produtoExistente.quantidade++;
+
     } else {
+
+        // Se não existe, cria um novo registro.
         produtos.push({
             nome: nome,
             preco: Number(preco),
@@ -739,6 +841,7 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
             cor: cor,
             quantidade: 1
         });
+
     }
 
     salvarCarrinho(produtos);
@@ -746,7 +849,8 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
     let mensagem = nome + " foi adicionado ao seu carrinho.";
 
     if (cor) {
-        mensagem = nome + " na cor " + cor + " foi adicionado ao seu carrinho.";
+        mensagem = nome + " na cor " + cor +
+            " foi adicionado ao seu carrinho.";
     }
 
     mostrarModal(
@@ -754,6 +858,7 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
         mensagem
     );
 }
+
 
 /* =========================
    ATUALIZAR CONTADOR
@@ -781,6 +886,7 @@ function atualizarContadorCarrinho() {
 
     contador.textContent = quantidadeTotal;
 }
+
 
 /* =========================
    MOSTRAR CARRINHO
@@ -825,25 +931,22 @@ function mostrarCarrinho() {
     let valorTotal = 0;
 
     produtos.forEach(function(produto, indice) {
+
         const subtotal = produto.preco * produto.quantidade;
 
         valorTotal += subtotal;
 
         const item = document.createElement("div");
-
         item.className = "item-carrinho";
 
         const informacoes = document.createElement("div");
-
         informacoes.className = "informacoes-carrinho";
 
         const imagem = document.createElement("img");
-
         imagem.src = produto.imagem;
         imagem.alt = produto.nome;
 
         const titulo = document.createElement("h3");
-
         titulo.textContent = produto.nome;
 
         const preco = document.createElement("p");
@@ -858,7 +961,7 @@ function mostrarCarrinho() {
 
         informacoes.appendChild(titulo);
 
-        // Mostra a cor quando houver uma variação escolhida
+        // Mostra a cor quando houver uma variação escolhida.
         if (produto.cor) {
             const corElemento = document.createElement("p");
 
@@ -873,11 +976,9 @@ function mostrarCarrinho() {
         informacoes.appendChild(subtotalElemento);
 
         const quantidade = document.createElement("div");
-
         quantidade.className = "quantidade-carrinho";
 
         const diminuir = document.createElement("button");
-
         diminuir.textContent = "-";
 
         diminuir.onclick = function() {
@@ -885,11 +986,9 @@ function mostrarCarrinho() {
         };
 
         const numero = document.createElement("span");
-
         numero.textContent = produto.quantidade;
 
         const aumentar = document.createElement("button");
-
         aumentar.textContent = "+";
 
         aumentar.onclick = function() {
@@ -927,6 +1026,7 @@ function mostrarCarrinho() {
     `;
 }
 
+
 /* =========================
    ALTERAR QUANTIDADE
 ========================= */
@@ -947,6 +1047,7 @@ function alterarQuantidade(indice, quantidade) {
     mostrarCarrinho();
 }
 
+
 /* =========================
    REMOVER PRODUTO
 ========================= */
@@ -961,11 +1062,13 @@ function removerDoCarrinho(indice) {
     mostrarCarrinho();
 }
 
+
 /* =========================
    CARROSSEL
 ========================= */
 
 let slideAtual = 0;
+
 
 /* =========================
    FINALIZAÇÃO DE COMPRA
@@ -973,6 +1076,7 @@ let slideAtual = 0;
 ========================= */
 
 function abrirFinalizacaoCompra() {
+
     const usuario = obterUsuarioLogado();
 
     const produtos = obterProdutosCarrinho();
@@ -1022,6 +1126,7 @@ function abrirFinalizacaoCompra() {
         </p>
 
         <form id="formFinalizacao">
+
             <fieldset class="opcoes-pagamento">
                 <legend>Escolha a forma de pagamento</legend>
 
@@ -1059,6 +1164,7 @@ function abrirFinalizacaoCompra() {
                     Confirmar pedido
                 </button>
             </div>
+
         </form>
     `;
 
@@ -1122,6 +1228,7 @@ function abrirFinalizacaoCompra() {
     });
 }
 
+
 /* =========================
    CONTROLES DO CARROSSEL
 ========================= */
@@ -1148,9 +1255,11 @@ function mostrarSlide(indice) {
     }
 }
 
+
 function mudarSlide(direcao) {
     mostrarSlide(slideAtual + direcao);
 }
+
 
 function irParaSlide(indice) {
     mostrarSlide(indice);

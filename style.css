@@ -177,7 +177,7 @@ nav a:hover {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,.55);
+    background: rgba(0, 0, 0, .55);
     color: #fff;
     border: none;
     padding: 14px;
@@ -196,7 +196,7 @@ nav a:hover {
 
 .anterior:hover,
 .proximo:hover {
-    background: rgba(0,0,0,.85);
+    background: rgba(0, 0, 0, .85);
 }
 
 .indicadores {
@@ -243,7 +243,7 @@ nav a:hover {
 
 .secao-produtos .lista-produtos {
     display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
 }
 
@@ -286,7 +286,7 @@ nav a:hover {
 
 .pagina-produtos .lista-produtos {
     display: grid;
-    grid-template-columns: repeat(3,minmax(0,1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
     margin-top: 30px;
     align-items: stretch;
@@ -339,7 +339,7 @@ nav a:hover {
     background: #fff;
     border-radius: 7px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,.18);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .18);
     z-index: 200;
 }
 
@@ -381,7 +381,7 @@ nav a:hover {
     background: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.12);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
     text-align: center;
     transition: transform .3s;
 }
@@ -450,7 +450,7 @@ nav a:hover {
 
 .sobre-grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
 }
 
@@ -459,7 +459,7 @@ nav a:hover {
     padding: 30px;
     min-height: 220px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
     border-top: 6px solid #7ed957;
 }
 
@@ -488,7 +488,7 @@ nav a:hover {
     max-width: 450px;
     padding: 35px;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.12);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .12);
     text-align: center;
 }
 
@@ -575,7 +575,7 @@ nav a:hover {
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
 }
 
 .item-carrinho img {
@@ -633,7 +633,7 @@ nav a:hover {
     margin-top: 25px;
     border-radius: 10px;
     text-align: right;
-    box-shadow: 0 3px 10px rgba(0,0,0,.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
 }
 
 .botao-login-carrinho {
@@ -674,7 +674,7 @@ nav a:hover {
     align-items: center;
     justify-content: center;
     padding: 18px;
-    background: rgba(0,0,0,.65);
+    background: rgba(0, 0, 0, .65);
 }
 
 .caixa-finalizacao {
@@ -686,7 +686,7 @@ nav a:hover {
     padding: 30px;
     background: #fff;
     border-radius: 14px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.25);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, .25);
 }
 
 .caixa-finalizacao h2 {
@@ -798,7 +798,7 @@ footer {
 
     .pagina-produtos .lista-produtos,
     .secao-produtos .lista-produtos {
-        grid-template-columns: repeat(2,minmax(0,1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .carrossel {
@@ -890,7 +890,7 @@ footer {
     .caixa-finalizacao {
         padding: 24px 18px;
     }
-    }
+}
 
 /*FOOTER NO FINAL DA PÁGINA SEM COMPRIMIR O CONTEÚDO*/
 
@@ -959,6 +959,23 @@ footer {
     object-fit: contain;
     object-position: center;
 }
-.vazia{
+
+.vazia {
     height: 70px;
+
+    /* Alteração da cor do VLibras */
+
+}
+
+:root {
+    --vlibras-btn-outline: 2px solid #7ed957;
+    --vlibras-btn-focus-visible-outline: 2px solid #333333;
+    --vlibras-btn-focus-visible-shadow: 0 0 10px 4px #7ed957;
+    --vlibras-btn-hover-filter: brightness(0.90);
+}
+
+div[vw-access-button] {
+    background-color: #7ed957 !important;
+    border: 2px solid #7ed957 !important;
+    border-radius: 12px !important;
 }
