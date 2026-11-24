@@ -3,42 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Carrinho</title>
+    <title>Meu Carrinho | Essenzya</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <a href="index.html" class="logo">
-        <img src="img/logo.png" alt="Logotipo do site">
-    </a>
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="produtos.html">Produtos</a>
-        <a href="sobre.html">Sobre Nós</a>
-        <div class="barra-pesquisa">
-            <input type="text" id="campoPesquisa" placeholder="Buscar produtos...">
-            <button type="button" onclick="pesquisar()">Buscar</button>
-        </div>
-        <a href="login.html" id="linkConta">Minha Conta</a>
-        <button id="btnSair" onclick="sair()" style="display: none;">Sair</button>
-        <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
-            <img src="img/carrinho.png" alt="Carrinho">
-            <span id="contadorCarrinho">0</span>
+
+    <header class="cabecalho">
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Logotipo Essenzya">
         </a>
-    </nav>
-</header>
 
-<main class="container-carrinho">
-    <h1>Meu Carrinho</h1>
-    <div id="itensCarrinho"></div>
-    <div id="resumoCarrinho"></div>
-    <a href="produtos.html" class="botao-login-carrinho">Continuar comprando</a>
-</main>
+        <nav class="menu-principal">
 
-<footer>
-    <p>&copy; 2026 Essenzya. Todos os direitos reservados.</p>
-</footer>
+            <div class="barra-pesquisa">
+                <input
+                    type="text"
+                    id="campoPesquisa"
+                    placeholder="Buscar produtos..."
+                >
 
-<script src="script.js"></script>
+                <button type="button" onclick="pesquisar()">
+                    Buscar
+                </button>
+            </div>
+
+            <a href="login.html" id="linkConta">Minha Conta</a>
+
+            <button
+                id="btnSair"
+                onclick="sair()"
+                style="display: none;"
+            >
+                Sair
+            </button>
+
+            <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
+                <img src="img/carrinho.png" alt="Carrinho">
+                <span id="contadorCarrinho">0</span>
+            </a>
+
+        </nav>
+    </header>
+
+    <main class="container-carrinho">
+        <h1>Meu Carrinho</h1>
+
+        <div id="itensCarrinho"></div>
+
+        <div id="resumoCarrinho"></div>
+
+        <a
+            href="index.html#listaProdutosInicio"
+            class="botao-login-carrinho"
+        >
+            Continuar comprando
+        </a>
+    </main>
+
+    <div class="area-sobre-nos">
+        <a href="sobre.html" class="botao-sobre-nos">
+            <span>Conheça a Essenzya</span>
+            <strong>Sobre Nós</strong>
+            <span class="seta-sobre-nos">→</span>
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Essenzya. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="catalogo.js"></script>
+
 </body>
 </html>

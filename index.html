@@ -1,195 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início | Minha Loja</title>
+    <title>Essenzya | Início</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- CABEÇALHO -->
-    <header>
+<header class="cabecalho">
+    <a href="index.html" class="logo">
+        <img src="img/logo.png" alt="Logo Essenzya">
+    </a>
 
-        <a href="index.html" class="logo">
-            <img src="img/logo.png" alt="Logotipo do site">
+    <nav class="menu-principal">
+        <div class="barra-pesquisa">
+            <input type="text" id="campoPesquisa" placeholder="Buscar produtos...">
+            <button type="button" onclick="pesquisar()">Buscar</button>
+        </div>
+
+        <a href="login.html" id="linkConta">Minha Conta</a>
+
+        <button id="btnSair" onclick="sair()" style="display:none;">
+            Sair
+        </button>
+
+        <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
+            <img src="img/carrinho.png" alt="Carrinho de compras">
+            <span id="contadorCarrinho">0</span>
         </a>
+    </nav>
+</header>
 
-        <nav>
+<div id="mensagem"></div>
 
-            <a href="index.html">Início</a>
-            <a href="produtos.html">Produtos</a>
-            <a href="sobre.html">Sobre Nós</a>
+<section class="carrossel">
+    <div class="slide ativo">
+        <img src="img/essenzya.jpg" alt="Destaque Essenzya">
+    </div>
 
-            <div class="barra-pesquisa">
-                <input
-                    type="text"
-                    id="campoPesquisa"
-                    placeholder="Buscar produtos..."
-                >
+    <div class="slide">
+        <img src="img/criação.essenzya.jpg" alt="Criação Essenzya">
+    </div>
 
-                <button type="button" onclick="pesquisar()">Buscar</button>
-            </div>
+    <div class="slide">
+        <img src="img/modelo.prin.jpg" alt="Modelo Essenzya">
+    </div>
 
-            <a href="login.html" id="linkConta">Minha Conta</a>
+    <button class="anterior" onclick="mudarSlide(-1)">&#10094;</button>
+    <button class="proximo" onclick="mudarSlide(1)">&#10095;</button>
 
-            <button
-                id="btnSair"
-                onclick="sair()"
-                style="display: none;"
-            >
-                Sair
-            </button>
+    <div class="indicadores">
+        <span class="ponto ativo" onclick="irParaSlide(0)"></span>
+        <span class="ponto" onclick="irParaSlide(1)"></span>
+        <span class="ponto" onclick="irParaSlide(2)"></span>
+    </div>
+</section>
 
-            <a href="carrinho.html" class="link-carrinho" title="Meu carrinho">
-                <img src="img/carrinho.png" alt="Carrinho">
-                <span id="contadorCarrinho">0</span>
-            </a>
+<main>
+    <section class="secao-produtos">
+        <h1>Produtos em Alta</h1>
+        <p class="subtitulo-produtos">
+            Confira alguns dos produtos destacados da nossa coleção.
+        </p>
 
-        </nav>
-
-    </header>
-
-
-    <!-- MENSAGEM DO USUÁRIO -->
-    <div id="mensagem"></div>
-
-
-    <!-- CARROSSEL -->
-    <section class="carrossel">
-
-        <div class="slide ativo">
-            <img src="img/essenzya.jpg" alt="Destaque 1">
-        </div>
-
-        <div class="slide">
-            <img src="img/criação.essenzya.jpg" alt="Destaque 2">
-        </div>
-
-        <div class="slide">
-            <img src="img/modelo.prin.jpg" alt="Destaque 3">
-        </div>
-
-        <button class="anterior" onclick="mudarSlide(-1)">&#10094;</button>
-        <button class="proximo" onclick="mudarSlide(1)">&#10095;</button>
-
-        <div class="indicadores">
-            <span class="ponto ativo" onclick="irParaSlide(0)"></span>
-            <span class="ponto" onclick="irParaSlide(1)"></span>
-            <span class="ponto" onclick="irParaSlide(2)"></span>
-        </div>
-
+        <div id="produtosEmAlta" class="lista-produtos"></div>
     </section>
 
+    <section class="secao-produtos secao-catalogo">
+        <h1>Nossos Produtos</h1>
+        <p class="subtitulo-produtos">
+            Encontre sua próxima peça favorita.
+        </p>
 
-    <!-- PRODUTOS EM ALTA -->
-    <main>
+        <div class="filtros-catalogo">
+            <div class="area-categorias">
+                <button
+                    type="button"
+                    class="botao-categorias"
+                    onclick="alternarMenuCategorias()"
+                    aria-expanded="false"
+                >
+                    <span id="textoBotaoCategoria">Todas as categorias</span>
+                    <span id="setaCategorias">▼</span>
+                </button>
 
-        <section class="secao-produtos">
-
-            <h1>Produtos em Alta</h1>
-
-            <p class="subtitulo-produtos">
-                Confira alguns dos produtos mais destacados da nossa coleção.
-            </p>
-
-            <div class="lista-produtos">
-
-                <!-- PRODUTO 1 -->
-                <div class="produto"
-                     data-categorias="masculino blusa">
-
-                    <img
-                        src="img/blusa.mas.preta.jpeg"
-                        alt="Blusa masculina preta"
-                    >
-
-                    <h2>Blusa masculina</h2>
-
-                    <p class="preco">R$ 39,99</p>
-
-                    <button
-                        type="button"
-                        onclick="adicionarAoCarrinho('blusa masculina', 39.99, 'img/blusa.mas.preta.jpeg', this)"
-                    >
-                        Adicionar ao carrinho
+                <div class="menu-categorias" id="menuCategorias">
+                    <button type="button" data-categoria="todas"
+                        onclick="selecionarCategoria('todas')">
+                        Todas as categorias
                     </button>
-
-                </div>
-
-
-                <!-- PRODUTO 2 -->
-                <div class="produto"
-                     data-categorias="masculino calca">
-
-                    <img
-                        src="img/calça.cargo.mas.preta.jpeg"
-                        alt="Calça cargo masculina preta"
-                    >
-
-                    <h2>Calça cargo masculina</h2>
-
-                    <p class="preco">R$ 90,00</p>
-
-                    <button
-                        type="button"
-                        onclick="adicionarAoCarrinho('Calça cargo masculina', 90, 'img/calça.cargo.mas.preta.jpeg', this)"
-                    >
-                        Adicionar ao carrinho
+                    <button type="button" data-categoria="feminino"
+                        onclick="selecionarCategoria('feminino')">
+                        Feminino
                     </button>
-
-                </div>
-
-
-                <!-- PRODUTO 3 -->
-                <div class="produto"
-                     data-categorias="feminino calca">
-
-                    <img
-                        src="img/short.cargo.fem.branco.jpeg"
-                        alt="Calça cargo feminina preta"
-                    >
-
-                    <h2>Short cargo feminino</h2>
-
-                    <p class="preco">R$ 60,00</p>
-
-                    <button
-                        type="button"
-                        onclick="adicionarAoCarrinho('Short cargo feminino', 60, 'img/short.cargo.fem.branco.jpeg', this)"
-                    >
-                        Adicionar ao carrinho
+                    <button type="button" data-categoria="masculino"
+                        onclick="selecionarCategoria('masculino')">
+                        Masculino
                     </button>
-
+                    <button type="button" data-categoria="blusa"
+                        onclick="selecionarCategoria('blusa')">
+                        Blusa
+                    </button>
+                    <button type="button" data-categoria="calca"
+                        onclick="selecionarCategoria('calca')">
+                        Calça
+                    </button>
                 </div>
-
             </div>
 
-            <div class="ver-mais">
-                <a href="produtos.html">Ver todos os produtos</a>
-            </div>
+            <p id="categoriaSelecionada">Exibindo: todas as categorias</p>
+        </div>
 
-        </section>
+        <div id="resultadoPesquisa"></div>
+        <div id="listaProdutosInicio" class="lista-produtos"></div>
+    </section>
 
-    </main>
+    <section class="area-sobre-nos">
+        <a href="sobre.html" class="botao-sobre-nos">
+            <span class="sobre-chamada">Conheça a Essenzya</span>
+            <strong>Sobre Nós</strong>
+            <span class="sobre-seta">→</span>
+        </a>
+    </section>
+</main>
 
+<footer>
+    <p>&copy; 2026 Essenzya. Todos os direitos reservados.</p>
+</footer>
 
-    <!-- RODAPÉ -->
-    <footer>
-
-        <p>&copy; 2026 Essenzya. Todos os direitos reservados.</p>
-
-    </footer>
-
-
-    <script src="script.js"></script>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-
- <!-- Vlibras -->
- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-
+<script src="script.js"></script>
+<script src="catalogo.js"></script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 </body>
-
 </html>

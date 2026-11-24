@@ -3,303 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos</title>
+    <title>Essenzya | Gerenciar Produtos</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-    <a href="index.html">
-        <img src="img/logo.png" alt="Logo" width="110">
+<header class="cabecalho">
+    <a href="index.html" class="logo">
+        <img src="img/logo.png" alt="Logo Essenzya">
     </a>
 
-    <nav>
-        <a href="index.html">Início</a>
-        <a href="produtos.html">Produtos</a>
-        <a href="sobre.html">Sobre Nós</a>
+    <nav class="menu-principal menu-admin">
+        <span class="identificacao-admin">Painel administrativo</span>
 
-        <div class="barra-pesquisa">
-            <input type="text" id="campoPesquisa"
-                   placeholder="Buscar produtos...">
-            <button type="button" onclick="pesquisar()">Buscar</button>
-        </div>
-
-        <a href="login.html" id="linkConta">Minha Conta</a>
-        <button id="btnSair" onclick="sair()" style="display:none;">Sair</button>
-
-        <a href="carrinho.html" class="link-carrinho">
-            <img src="img/carrinho.png" alt="Carrinho">
-            <span id="contadorCarrinho">0</span>
-        </a>
+        <button type="button" class="botao-sair-admin" onclick="sairAdministrador()">
+            Sair
+        </button>
     </nav>
 </header>
 
-<main class="pagina-produtos">
+<main class="painel-admin">
 
-    <h1>Nossos Produtos</h1>
+    <div class="titulo-painel">
+        <div>
+            <span class="subtitulo-painel">ESSENZYA</span>
+            <h1>Gerenciar Produtos</h1>
+            <p>Cadastre, edite e atualize os produtos da loja.</p>
+        </div>
 
-    <div class="area-categorias">
+        <div class="contador-admin">
+            <span id="quantidadeProdutosAdmin">0</span>
+            <small>Produtos cadastrados</small>
+        </div>
+    </div>
 
-        <button id="btnCategorias"
-                class="botao-categorias"
+    <section class="formulario-admin" id="formularioAdmin" hidden>
+        <h2 id="tituloFormularioProduto">Adicionar novo produto</h2>
+
+        <form id="formProdutoAdmin">
+            <input type="hidden" id="produtoId">
+            <input type="hidden" id="imagemProdutoValorAdmin">
+
+            <div class="campos-admin">
+
+                <div class="campo-admin campo-largo">
+                    <label for="nomeProdutoAdmin">Nome do produto</label>
+                    <input
+                        type="text"
+                        id="nomeProdutoAdmin"
+                        required
+                        placeholder="Ex.: Blusa feminina"
+                    >
+                </div>
+
+                <div class="campo-admin">
+                    <label for="precoProdutoAdmin">Preço (R$)</label>
+                    <input
+                        type="number"
+                        id="precoProdutoAdmin"
+                        min="0.01"
+                        step="0.01"
+                        required
+                        placeholder="39.99"
+                    >
+                </div>
+
+                <div class="campo-admin campo-largo campo-categorias-admin">
+                    <label>Categorias</label>
+
+                    <select id="categoriaProdutoAdmin" multiple required>
+                        <option value="feminino">Feminino</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="blusa">Blusa</option>
+                        <option value="calca">Calça</option>
+                    </select>
+
+                    <div class="categorias-admin" id="botoesCategoriasAdmin">
+                        <button type="button" class="categoria-admin" data-categoria="feminino">
+                            Feminino
+                        </button>
+
+                        <button type="button" class="categoria-admin" data-categoria="masculino">
+                            Masculino
+                        </button>
+
+                        <button type="button" class="categoria-admin" data-categoria="blusa">
+                            Blusa
+                        </button>
+
+                        <button type="button" class="categoria-admin" data-categoria="calca">
+                            Calça
+                        </button>
+                    </div>
+
+                    <small>Toque nas categorias para selecionar ou desmarcar.</small>
+                </div>
+
+                <div class="campo-admin campo-largo">
+                    <label for="coresProdutoAdmin">Cores disponíveis</label>
+
+                    <input
+                        type="text"
+                        id="coresProdutoAdmin"
+                        placeholder="Ex.: preto, branco, azul"
+                    >
+
+                    <small>Separe as cores por vírgula.</small>
+                </div>
+
+                <!-- IMAGEM PRINCIPAL: usada quando há zero ou uma cor -->
+                <div
+                    class="campo-admin campo-largo"
+                    id="campoImagemPrincipalContainer"
+                >
+                    <label>Imagem principal do produto</label>
+
+                    <div class="campo-imagem-admin">
+                        <strong>Escolha como adicionar a imagem:</strong>
+
+                        <div class="opcoes-imagem-admin">
+                            <label for="imagemProdutoAdmin">
+                                Selecionar do dispositivo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="imagemProdutoAdmin"
+                                accept="image/*"
+                            >
+
+                            <div class="separador-imagem-admin">OU</div>
+
+                            <label for="urlImagemPrincipalAdmin">
+                                Colar link da imagem
+                            </label>
+
+                            <input
+                                type="url"
+                                id="urlImagemPrincipalAdmin"
+                                placeholder="https://exemplo.com/imagem.jpg"
+                            >
+                        </div>
+
+                        <small>
+                            Selecione uma foto do computador ou celular,
+                            ou cole um endereço de imagem da internet.
+                        </small>
+
+                        <img
+                            id="previaImagemPrincipal"
+                            alt="Prévia da imagem principal"
+                        >
+
+                        <button
+                            type="button"
+                            id="removerImagemPrincipalAdmin"
+                            class="botao-remover-imagem-admin"
+                        >
+                            Remover imagem
+                        </button>
+                    </div>
+                </div>
+
+                <!-- IMAGENS INDIVIDUAIS: usadas quando há duas ou mais cores -->
+                <div
+                    class="campo-admin campo-largo"
+                    id="campoImagensCoresContainer"
+                    style="display: none;"
+                >
+                    <label>Imagens das cores</label>
+
+                    <div id="imagensCoresAdmin" class="imagens-cores-admin"></div>
+
+                    <small class="ajuda-cores">
+                        Cada cor terá seu próprio campo de imagem.
+                        Selecione uma foto do dispositivo ou cole um link.
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="opcoes-promocao-admin">
+                <label class="check-promocao">
+                    <input type="checkbox" id="promocaoProdutoAdmin">
+                    Produto em promoção
+                </label>
+
+                <div class="campo-admin">
+                    <label for="precoPromocionalAdmin">
+                        Preço promocional (R$)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="precoPromocionalAdmin"
+                        min="0.01"
+                        step="0.01"
+                        placeholder="29.99"
+                    >
+                </div>
+            </div>
+
+            <div class="acoes-formulario-admin">
+                <button
+                    type="submit"
+                    id="botaoSalvarProduto"
+                    class="botao-salvar-admin"
+                >
+                    Salvar produto
+                </button>
+
+                <button
+                    type="button"
+                    id="botaoCancelarEdicao"
+                    class="botao-cancelar-admin"
+                    onclick="cancelarEdicaoProduto()"
+                    style="display: none;"
+                >
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="secao-lista-admin">
+        <div class="cabecalho-lista-admin">
+            <div>
+                <h2>Produtos cadastrados</h2>
+                <p>As alterações feitas aqui também aparecem na página inicial.</p>
+            </div>
+
+            <button
                 type="button"
-                onclick="alternarMenuCategorias()">
-            Categorias
-            <span id="setaCategorias">▼</span>
-        </button>
-
-        <div id="menuCategorias" class="menu-categorias">
-
-            <button type="button" data-categoria="todas"
-                    onclick="selecionarCategoria('todas')">
-                Todas as categorias
+                id="botaoAdicionarProduto"
+                class="botao-adicionar-produto"
+                aria-label="Adicionar produto"
+                title="Adicionar produto"
+            >
+                +
             </button>
-
-            <button type="button" data-categoria="feminino"
-                    onclick="selecionarCategoria('feminino')">
-                Feminino
-            </button>
-
-            <button type="button" data-categoria="masculino"
-                    onclick="selecionarCategoria('masculino')">
-                Masculino
-            </button>
-
-            <button type="button" data-categoria="blusa"
-                    onclick="selecionarCategoria('blusa')">
-                Blusa
-            </button>
-
-            <button type="button" data-categoria="calca"
-                    onclick="selecionarCategoria('calca')">
-                Calça
-            </button>
-
         </div>
 
-    </div>
-
-    <p id="categoriaSelecionada">
-        Categoria: Todas as categorias
-    </p>
-
-    <p id="resultadoPesquisa"></p>
-
-    <div class="lista-produtos" id="listaProdutos">
-
-        <!-- PRODUTO 1: PRETO E BRANCO -->
-        <div class="produto"
-             data-categorias="feminino blusa"
-             data-cores="preto branco"
-             data-imagem-preto="/img/blusa.fem.preta.jpeg"
-             data-imagem-branco="/img/blusa.fem.branca.jpeg">
-
-            <img src="/img/blusa.fem.preta.jpeg" alt="Produto 1">
-
-            <h3>Blusa feminina</h3>
-
-            <p class="preco">R$ 39,99</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Blusa feminina', 39.99, '/img/blusa.fem.preta.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 2: PRETO E BRANCO -->
-        <div class="produto" 
-             data-categorias="masculino blusa"
-             data-cores="preto branco"
-             data-imagem-preto="/img/blusa.mas.preta.jpeg"
-             data-imagem-branco="/img/blusa.mas.branca.jpeg">
-
-            <img src="img/blusa.mas.preta.jpeg" alt="Produto 2">
-
-            <h3>Blusa masculina</h3>
-
-            <p class="preco">R$ 39,99</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Blusa masculina', 39.99, 'img/blusa.mas.preta.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 3: PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="masculino blusa"
-         data-cores="preto branco"
-         data-imagem-branco="img/blusa.mas.branca.long.jpeg"
-         data-imagem-preto="img/blusa.mas.preta.long.jpeg">
-
-            <img src="img/blusa.mas.preta.long.jpeg" alt="Produto 3">
-
-            <h3>Blusa manga longa masculina</h3>
-
-            <p class="preco">R$ 45,99</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Blusa manga longa masculina', 45.99, 'img/blusa.mas.preta.long.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 4: PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="feminino blusa"         
-         data-cores="preto branco"
-         data-imagem-branco="img/blusa.fem.branca.long.jpeg"
-         data-imagem-preto="img/blusa.fem.preta.long.jpeg">
-
-            <img src="img/blusa.fem.preta.long.jpeg" alt="Produto 4">
-
-            <h3>Blusa manga longa feminina</h3>
-
-            <p class="preco">R$ 45,99</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Blusa manga longa feminina', 45.99, 'img/blusa.fem.preta.long.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 5: PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="masculino calca"
-         data-cores="preto branco"
-         data-imagem-branco="img/short.cargo.mas.branco.jpeg"
-         data-imagem-preto="img/short.cargo.mas.preto.jpeg">
->
-
-            <img src="img/short.cargo.mas.preto.jpeg" alt="Produto 5">
-
-            <h3>Short cargo masculino</h3>
-
-            <p class="preco">R$ 60,00</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Short cargo masculino', 60, 'img/short.cargo.mas.preto.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 6: PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="feminino calca"
-         data-cores="preto branco"
-         data-imagem-branco="img/short.cargo.fem.branco.jpeg"
-         data-imagem-preto="img/short.cargo.fem.preto.jpeg">
-
-            <img src="img/short.cargo.fem.preto.jpeg" alt="Produto 6">
-
-            <h3>Short cargo feminino</h3>
-
-            <p class="preco">R$ 60,00</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Short cargo feminino', 60, 'img/short.cargo.fem.preto.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 7: PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="feminino calca"
-         data-cores="preto branco"
-         data-imagem-branco="img/calça.cargo.fem.branca.jpeg"
-         data-imagem-preto="img/calça.cargo.fem.preta.jpeg">
-
-            <img src="img/calça.cargo.fem.preta.jpeg" alt="Produto 7">
-
-            <h3>Calça cargo feminina</h3>
-
-            <p class="preco">R$ 90,00</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Calça cargo feminina', 90, 'img/calça.cargo.fem.preta.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 8:PRETO E BRANCO -->
-        <div class="produto" 
-         data-categorias="masculino calca"
-         data-cores="preto branco"
-         data-imagem-branco="img/calça.cargo.mas.branca.jpeg"
-         data-imagem-preto="img/calça.cargo.mas.preta.jpeg">
-
-            <img src="img/calça.cargo.mas.preta.jpeg" alt="Produto 8">
-
-            <h3>Calça cargo masculina</h3>
-
-            <p class="preco">R$ 90,00</p>
-
-            <div class="opcoes-cores"></div>
-
-            <button onclick="adicionarAoCarrinho('Calça cargo masculina', 90, 'img/calça.cargo.mas.preta.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 9 -->
-        <div class="produto" data-categorias="masculino calca">
-
-            <img src="img/calça.skinny.mas.jpeg" alt="Produto 9">
-
-            <h3>Calça skinny masculina</h3>
-
-            <p class="preco">R$ 70,00</p>
-
-            <div class="vazia"></div>
-
-            <button onclick="adicionarAoCarrinho('Calça skinny masculina', 70, 'img/calça.skinny.mas.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-
-        <!-- PRODUTO 10 -->
-        <div class="produto" data-categorias="feminino calca">
-
-            <img src="img/calça.skinny.fem.jpeg" alt="Produto 10">
-
-            <h3>Calça skinny feminina</h3>
-
-            <p class="preco">R$ 70,00</p>
-
-            <div class="vazia"></div>
-
-            <button onclick="adicionarAoCarrinho('Calça skinny feminina', 70, 'img/calça.skinny.fem.jpeg', this)">
-                Adicionar ao carrinho
-            </button>
-
-        </div>
-
-    </div>
+        <div id="listaProdutosAdmin" class="lista-produtos lista-admin"></div>
+    </section>
+
+    <section class="area-sobre-nos">
+        <a href="sobre.html" class="botao-sobre-nos">
+            <span class="sobre-chamada">Conheça a Essenzya</span>
+            <strong>Sobre Nós</strong>
+            <span class="sobre-seta">→</span>
+        </a>
+    </section>
 
 </main>
 
@@ -308,6 +263,8 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="catalogo.js"></script>
+<script src="admin.js"></script>
 
 </body>
 </html>

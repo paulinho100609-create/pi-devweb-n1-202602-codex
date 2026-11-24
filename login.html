@@ -3,48 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Conta</title>
-
-    <!-- Conexão com o CSS -->
+    <title>Minha Conta | Essenzya</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <main class="container-login">
-
         <h1>Minha Conta</h1>
 
         <form id="formLogin">
+            <input type="email" id="emailLogin"
+                placeholder="Digite seu e-mail" required>
 
-            <input
-                type="email"
-                id="emailLogin"
-                placeholder="Digite seu e-mail"
-                required
-            >
-
-            <input
-                type="password"
-                id="senhaLogin"
-                placeholder="Digite sua senha"
-                required
-            >
+            <input type="password" id="senhaLogin"
+                placeholder="Digite sua senha" required>
 
             <button type="submit">Entrar</button>
-
         </form>
 
         <p>Não tem uma conta?</p>
-
         <a href="cadastro.html">Cadastre-se</a>
 
         <br><br>
 
         <a href="index.html">Voltar ao início</a>
-
     </main>
 
     <script src="script.js"></script>
+    <script src="admin-login.js"></script>
 
 </body>
 </html>
