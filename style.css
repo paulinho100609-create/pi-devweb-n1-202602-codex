@@ -1,3 +1,4 @@
+
 /* =========================
    CONFIGURAÇÕES GERAIS
 ========================= */
@@ -18,6 +19,7 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -61,6 +63,7 @@ button {
     justify-content: flex-end;
     gap: 25px;
     flex: 1;
+    min-width: 0;
 }
 
 .menu-principal > a:not(.link-carrinho) {
@@ -82,6 +85,7 @@ button {
     align-items: center;
     gap: 6px;
     flex: 0 1 370px;
+    min-width: 0;
 }
 
 .barra-pesquisa input {
@@ -125,6 +129,44 @@ button {
 #btnSair:hover,
 .botao-sair-admin:hover {
     background: #555;
+}
+
+/* Ícone de perfil */
+
+.cabecalho #linkConta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.cabecalho #linkConta::before {
+    content: "";
+    display: block;
+    width: 29px;
+    height: 29px;
+    background-color: #222;
+
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-4.42 0-8 2.24-8 5v1h16v-1c0-2.76-3.58-5-8-5Z'/%3E%3C/svg%3E");
+
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.cabecalho #linkConta:hover::before {
+    background-color: #fff;
 }
 
 /* Carrinho */
@@ -1690,5 +1732,300 @@ footer {
 
     .categoria-admin {
         flex: 1 1 calc(50% - 8px);
+    }
+}
+
+/* =========================================
+   AJUSTE FINAL DO CABEÇALHO EM TODOS OS DISPOSITIVOS
+========================================= */
+
+/* Logo maior */
+
+.cabecalho .logo img {
+    width: 150px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Perfil sem texto */
+
+.cabecalho #linkConta {
+    font-size: 0 !important;
+    line-height: 0;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cabecalho #linkConta::before {
+    width: 29px;
+    height: 29px;
+}
+
+/* Mantém pesquisa, perfil e carrinho alinhados */
+
+.cabecalho .menu-principal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    min-width: 0;
+}
+
+.cabecalho .barra-pesquisa {
+    flex: 1 1 370px;
+    min-width: 0;
+}
+
+/* Cabeçalho para celular */
+
+@media (max-width: 650px) {
+
+    .cabecalho {
+        width: 100%;
+        min-height: auto;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Logo centralizada e maior */
+
+    .cabecalho .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cabecalho .logo img {
+        width: 190px;
+        height: 85px;
+        object-fit: contain;
+    }
+
+    /* Pesquisa, perfil e carrinho na mesma linha */
+
+    .cabecalho .menu-principal {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+
+    .cabecalho .barra-pesquisa {
+        order: 0;
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: none;
+        gap: 4px;
+    }
+
+    .cabecalho .barra-pesquisa input {
+        flex: 1;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 7px;
+        font-size: 12px;
+    }
+
+    .cabecalho .barra-pesquisa button {
+        flex-shrink: 0;
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    /* Ícone de perfil */
+
+    .cabecalho #linkConta {
+        flex: 0 0 38px;
+        width: 38px;
+        min-width: 38px;
+        height: 42px;
+    }
+
+    .cabecalho #linkConta::before {
+        width: 27px;
+        height: 27px;
+    }
+
+    /* Carrinho */
+
+    .cabecalho .link-carrinho {
+        flex: 0 0 38px;
+        width: 38px;
+        min-width: 38px;
+        height: 42px;
+    }
+
+    .cabecalho .link-carrinho img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    .cabecalho #contadorCarrinho {
+        top: -2px;
+        right: -3px;
+        width: 17px;
+        height: 17px;
+        font-size: 10px;
+    }
+}
+
+/* Celulares menores */
+
+@media (max-width: 380px) {
+
+    .cabecalho {
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .cabecalho .menu-principal {
+        gap: 4px;
+    }
+
+    .cabecalho .barra-pesquisa {
+        gap: 3px;
+    }
+
+    .cabecalho .barra-pesquisa input {
+        padding: 9px 6px;
+        font-size: 11px;
+    }
+
+    .cabecalho .barra-pesquisa button {
+        padding: 9px 6px;
+        font-size: 10px;
+    }
+
+    .cabecalho #linkConta {
+        flex-basis: 34px;
+        width: 34px;
+        min-width: 34px;
+    }
+
+    .cabecalho .link-carrinho {
+        flex-basis: 34px;
+        width: 34px;
+        min-width: 34px;
+    }
+}
+
+/* =========================================
+   CORREÇÃO DO CARROSSEL NO CELULAR
+========================================= */
+
+@media (max-width: 650px) {
+
+    .carrossel {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        background: transparent;
+        overflow: hidden;
+    }
+
+    .slide {
+        width: 100%;
+        height: auto;
+    }
+
+    .slide.ativo {
+        display: block;
+        height: auto;
+    }
+
+    .slide img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .anterior,
+    .proximo {
+        top: 50%;
+        padding: 9px;
+        font-size: 18px;
+    }
+
+    .indicadores {
+        bottom: 8px;
+    }
+
+    .ponto {
+        width: 9px;
+        height: 9px;
+    }
+}
+/* =========================
+   CORREÇÃO DA BORDA PRETA DO SLIDE
+========================= */
+
+.carrossel {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    overflow: hidden;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.slide {
+    width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.slide.ativo {
+    display: block;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center;
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 650px) {
+    .carrossel {
+        height: auto !important;
+        min-height: 0 !important;
+        background: transparent !important;
+    }
+
+    .slide,
+    .slide.ativo {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto !important;
+        object-fit: contain !important;
     }
 }
