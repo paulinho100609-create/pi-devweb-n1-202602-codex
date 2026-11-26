@@ -1,6 +1,8 @@
+
 /* =========================
    MODAIS PERSONALIZADOS
 ========================= */
+
 function mostrarModal(titulo, mensagem, aoFechar = null) {
     let modalExistente = document.getElementById("modalPersonalizado");
 
@@ -120,7 +122,7 @@ let categoriaAtual = "todas";
 ========================= */
 
 function normalizarTexto(texto) {
-    return texto
+    return String(texto || "")
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
@@ -206,7 +208,6 @@ function configurarOpcoesCores() {
 
         areaCores.appendChild(grupo);
 
-        // Seleciona a primeira cor automaticamente
         const primeiraOpcao = grupo.querySelector("button");
 
         if (primeiraOpcao) {
@@ -246,7 +247,6 @@ function selecionarCorProduto(botao, cor) {
 
     produto.dataset.corSelecionada = cor;
 
-    // Busca a imagem correspondente à cor
     const nomeAtributo = "imagem" +
         cor.charAt(0).toUpperCase() +
         cor.slice(1);
@@ -672,12 +672,10 @@ function obterChaveCarrinho() {
 
 function identificarCorProduto(produto) {
 
-    // Mantém a cor já registrada.
     if (produto.cor) {
         return normalizarTexto(String(produto.cor));
     }
 
-    // Caso não exista cor registrada, identifica pela imagem.
     const imagem = normalizarTexto(String(produto.imagem || ""));
 
     if (imagem.includes("preta") || imagem.includes("preto")) {
@@ -694,7 +692,7 @@ function identificarCorProduto(produto) {
 
 /* =========================
    OBTER PRODUTOS DO CARRINHO
-   AGRUPAR PRODUTOS REPETIDOS
+   AGRUPAR POR NOME, COR E TAMANHO
 ========================= */
 
 function obterProdutosCarrinho() {
@@ -714,10 +712,13 @@ function obterProdutosCarrinho() {
             String(produto.nome || "")
         );
 
+        const tamanhoIdentificado = String(produto.tamanho || "");
+
         const existente = produtosAgrupados.find(function(item) {
 
             return normalizarTexto(String(item.nome || "")) === nomeNormalizado &&
-                identificarCorProduto(item) === corIdentificada;
+                identificarCorProduto(item) === corIdentificada &&
+                String(item.tamanho || "") === tamanhoIdentificado;
 
         });
 
@@ -732,13 +733,13 @@ function obterProdutosCarrinho() {
             produtosAgrupados.push({
                 ...produto,
                 cor: corIdentificada,
+                tamanho: tamanhoIdentificado,
                 quantidade: Number(produto.quantidade || 1)
             });
 
         }
     });
 
-    // Salva os produtos já agrupados para corrigir duplicações antigas.
     localStorage.setItem(chave, JSON.stringify(produtosAgrupados));
 
     return produtosAgrupados;
@@ -762,10 +763,10 @@ function salvarCarrinho(produtos) {
 
 /* =========================
    ADICIONAR AO CARRINHO
-   COM AGRUPAMENTO POR NOME E COR
+   AGRUPAR POR NOME, COR E TAMANHO
 ========================= */
 
-function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
+function adicionarAoCarrinho(nome, preco, imagem, elemento = null, tamanho = "") {
 
     const usuario = obterUsuarioLogado();
 
@@ -788,8 +789,6 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
 
     let imagemFinal = imagem;
 
-    // Se o botão veio de um produto com opções de cor,
-    // utiliza a cor selecionada pelo usuário.
     if (elemento) {
 
         const card = elemento.closest(".produto");
@@ -815,30 +814,38 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
         }
     }
 
+    if (!["P", "M", "G", "GG"].includes(String(tamanho))) {
+        mostrarModal(
+            "Escolha um tamanho",
+            "Selecione P, M, G ou GG antes de adicionar o produto ao carrinho."
+        );
+
+        return;
+    }
+
     let produtos = obterProdutosCarrinho();
 
-    // Procura o mesmo produto com a mesma cor.
     const produtoExistente = produtos.find(function(produto) {
 
         return normalizarTexto(String(produto.nome || "")) ===
             normalizarTexto(String(nome || "")) &&
-            identificarCorProduto(produto) === cor;
+            identificarCorProduto(produto) === cor &&
+            String(produto.tamanho || "") === String(tamanho);
 
     });
 
     if (produtoExistente) {
 
-        // Se já existe, aumenta a quantidade.
         produtoExistente.quantidade++;
 
     } else {
 
-        // Se não existe, cria um novo registro.
         produtos.push({
             nome: nome,
             preco: Number(preco),
             imagem: imagemFinal,
             cor: cor,
+            tamanho: tamanho,
             quantidade: 1
         });
 
@@ -846,12 +853,14 @@ function adicionarAoCarrinho(nome, preco, imagem, elemento = null) {
 
     salvarCarrinho(produtos);
 
-    let mensagem = nome + " foi adicionado ao seu carrinho.";
+    let mensagem = nome;
 
     if (cor) {
-        mensagem = nome + " na cor " + cor +
-            " foi adicionado ao seu carrinho.";
+        mensagem += " na cor " + cor;
     }
+
+    mensagem += " no tamanho " + tamanho;
+    mensagem += " foi adicionado ao seu carrinho.";
 
     mostrarModal(
         "Produto adicionado!",
@@ -961,7 +970,6 @@ function mostrarCarrinho() {
 
         informacoes.appendChild(titulo);
 
-        // Mostra a cor quando houver uma variação escolhida.
         if (produto.cor) {
             const corElemento = document.createElement("p");
 
@@ -972,8 +980,42 @@ function mostrarCarrinho() {
             informacoes.appendChild(corElemento);
         }
 
+        /* TAMANHO DO PRODUTO */
+
+        const tamanhoLinha = document.createElement("div");
+        tamanhoLinha.className = "tamanho-carrinho";
+
+        const tamanhoLabel = document.createElement("label");
+        tamanhoLabel.textContent = "Tamanho: ";
+
+        const seletorTamanho = document.createElement("select");
+        seletorTamanho.className = "select-tamanho-carrinho";
+
+        ["P", "M", "G", "GG"].forEach(function(tamanhoOpcao) {
+            const opcao = document.createElement("option");
+
+            opcao.value = tamanhoOpcao;
+            opcao.textContent = tamanhoOpcao;
+
+            opcao.selected =
+                String(produto.tamanho || "M") === tamanhoOpcao;
+
+            seletorTamanho.appendChild(opcao);
+        });
+
+        seletorTamanho.addEventListener("change", function() {
+            alterarTamanhoCarrinho(indice, seletorTamanho.value);
+        });
+
+        tamanhoLabel.appendChild(seletorTamanho);
+        tamanhoLinha.appendChild(tamanhoLabel);
+
+        informacoes.appendChild(tamanhoLinha);
+
         informacoes.appendChild(preco);
         informacoes.appendChild(subtotalElemento);
+
+        /* QUANTIDADE */
 
         const quantidade = document.createElement("div");
         quantidade.className = "quantidade-carrinho";
@@ -998,6 +1040,8 @@ function mostrarCarrinho() {
         quantidade.appendChild(diminuir);
         quantidade.appendChild(numero);
         quantidade.appendChild(aumentar);
+
+        /* REMOVER PRODUTO */
 
         const remover = document.createElement("button");
 
@@ -1040,6 +1084,42 @@ function alterarQuantidade(indice, quantidade) {
 
     if (produtos[indice].quantidade <= 0) {
         produtos.splice(indice, 1);
+    }
+
+    salvarCarrinho(produtos);
+
+    mostrarCarrinho();
+}
+
+
+/* =========================
+   ALTERAR TAMANHO NO CARRINHO
+========================= */
+
+function alterarTamanhoCarrinho(indice, novoTamanho) {
+    let produtos = obterProdutosCarrinho();
+
+    if (!produtos[indice] ||
+        !["P", "M", "G", "GG"].includes(novoTamanho)) {
+        return;
+    }
+
+    const produtoAtual = produtos[indice];
+
+    const duplicado = produtos.findIndex(function(produto, i) {
+        return i !== indice &&
+            normalizarTexto(String(produto.nome || "")) ===
+                normalizarTexto(String(produtoAtual.nome || "")) &&
+            identificarCorProduto(produto) ===
+                identificarCorProduto(produtoAtual) &&
+            String(produto.tamanho || "") === novoTamanho;
+    });
+
+    if (duplicado !== -1) {
+        produtos[duplicado].quantidade += produtoAtual.quantidade;
+        produtos.splice(indice, 1);
+    } else {
+        produtos[indice].tamanho = novoTamanho;
     }
 
     salvarCarrinho(produtos);
@@ -1208,7 +1288,6 @@ function abrirFinalizacaoCompra() {
             return soma + Number(produto.quantidade);
         }, 0);
 
-        // Limpa somente o carrinho do usuário atualmente conectado.
         salvarCarrinho([]);
 
         fechar();

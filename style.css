@@ -1539,13 +1539,8 @@ footer {
 }
 
 @keyframes aparecerFundoAdmin {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes aparecerCaixaAdmin {
@@ -1553,7 +1548,6 @@ footer {
         opacity: 0;
         transform: translateY(15px) scale(.97);
     }
-
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -1784,7 +1778,6 @@ footer {
 /* Cabeçalho para celular */
 
 @media (max-width: 650px) {
-
     .cabecalho {
         width: 100%;
         min-height: auto;
@@ -1795,8 +1788,6 @@ footer {
         justify-content: center;
         gap: 10px;
     }
-
-    /* Logo centralizada e maior */
 
     .cabecalho .logo {
         width: 100%;
@@ -1810,8 +1801,6 @@ footer {
         height: 85px;
         object-fit: contain;
     }
-
-    /* Pesquisa, perfil e carrinho na mesma linha */
 
     .cabecalho .menu-principal {
         width: 100%;
@@ -1845,8 +1834,6 @@ footer {
         font-size: 11px;
     }
 
-    /* Ícone de perfil */
-
     .cabecalho #linkConta {
         flex: 0 0 38px;
         width: 38px;
@@ -1858,8 +1845,6 @@ footer {
         width: 27px;
         height: 27px;
     }
-
-    /* Carrinho */
 
     .cabecalho .link-carrinho {
         flex: 0 0 38px;
@@ -1886,7 +1871,6 @@ footer {
 /* Celulares menores */
 
 @media (max-width: 380px) {
-
     .cabecalho {
         padding-left: 7px;
         padding-right: 7px;
@@ -1928,7 +1912,6 @@ footer {
 ========================================= */
 
 @media (max-width: 650px) {
-
     .carrossel {
         width: 100%;
         height: auto;
@@ -1972,6 +1955,7 @@ footer {
         height: 9px;
     }
 }
+
 /* =========================
    CORREÇÃO DA BORDA PRETA DO SLIDE
 ========================= */
@@ -2010,6 +1994,7 @@ footer {
 }
 
 /* Ajuste para celulares */
+
 @media (max-width: 650px) {
     .carrossel {
         height: auto !important;
@@ -2029,3 +2014,635 @@ footer {
         object-fit: contain !important;
     }
 }
+
+/* =========================
+   CABEÇALHO FIXO
+========================= */
+
+.cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* =========================
+   FORNECEDORES E TRANSPORTADORA
+========================= */
+
+.secao-parceiros {
+    width: 100%;
+    padding: 45px 20px;
+    margin-top: 35px;
+    background: #fff;
+    text-align: center;
+}
+
+.secao-parceiros h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 26px;
+}
+
+.subtitulo-parceiros {
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.lista-fornecedores {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 45px;
+}
+
+.fornecedor {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.circulo-fornecedor {
+    width: 125px;
+    height: 125px;
+    border: 3px solid #7ed957;
+    border-radius: 50%;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 12px;
+}
+
+.circulo-fornecedor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    transform: scale(1.15);
+
+}
+
+.fornecedor h3 {
+    color: #333;
+    font-size: 15px;
+}
+
+.transportadora {
+    margin: 40px auto 0;
+    padding-top: 25px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.titulo-transportadora {
+    color: #666;
+    font-size: 14px;
+}
+
+.transportadora strong {
+    color: #287b3d;
+    font-size: 24px;
+}
+
+@media (max-width: 600px) {
+    .secao-parceiros {
+        padding: 35px 12px;
+    }
+
+    .lista-fornecedores {
+        gap: 28px 18px;
+    }
+
+    .fornecedor {
+        width: 125px;
+    }
+
+    .circulo-fornecedor {
+        width: 105px;
+        height: 105px;
+    }
+}
+
+/* =========================
+   TAMANHO NO CARRINHO
+========================= */
+
+.tamanho-carrinho {
+    margin: 8px 0;
+}
+
+.tamanho-carrinho label {
+    font-weight: 600;
+}
+
+.select-tamanho-carrinho {
+    padding: 8px 10px;
+    margin-left: 5px;
+    min-width: 75px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    background: #fff;
+    color: #333;
+    font: inherit;
+}
+
+@media (max-width: 600px) {
+    .item-carrinho {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .item-carrinho img {
+        width: 95px;
+        height: 110px;
+    }
+}
+
+/* =========================
+   LOCALIZAÇÃO
+========================= */
+
+.secao-localizacao {
+    width: 100%;
+    margin-top: 35px;
+    padding: 40px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    text-align: center;
+}
+
+.secao-localizacao h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 26px;
+}
+
+.localizacao-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.localizacao-imagem {
+    width: 50%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f2f2f2;
+}
+
+.localizacao-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.localizacao-informacoes {
+    flex: 1;
+    text-align: left;
+    padding: 15px;
+}
+
+.localizacao-informacoes h3 {
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.localizacao-informacoes p {
+    color: #666;
+    line-height: 1.7;
+}
+
+/* =========================
+   INSTAGRAM
+========================= */
+
+.secao-instagram {
+    width: 100%;
+    margin-top: 35px;
+    padding: 40px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+    text-align: center;
+}
+
+.secao-instagram h2 {
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.secao-instagram > p {
+    color: #666;
+    margin-bottom: 28px;
+}
+
+.instagram-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.instagram-imagem {
+    width: 28%;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f2f2f2;
+}
+
+.instagram-imagem img {
+    width: 50%;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+
+.instagram-informacoes {
+    flex: 1;
+    text-align: left;
+    padding: 15px;
+}
+
+.instagram-informacoes h3 {
+    font-size: 23px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.instagram-informacoes p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.botao-instagram {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #7ed957;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: .2s;
+}
+
+.botao-instagram:hover {
+    background: #65bd40;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+    .localizacao-container,
+    .instagram-container {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .localizacao-imagem,
+    .instagram-imagem {
+        width: 100%;
+        height: 210px;
+    }
+
+    .localizacao-informacoes,
+    .instagram-informacoes {
+        width: 100%;
+        text-align: center;
+    }
+
+    .secao-localizacao,
+    .secao-instagram {
+        padding: 30px 15px;
+    }
+
+    .secao-localizacao h2,
+    .secao-instagram h2 {
+        font-size: 23px;
+    }
+}
+
+/* =====================================
+   SELEÇÃO DE TAMANHO DOS PRODUTOS
+===================================== */
+
+/* Escondida por padrão. Só aparece após clicar em adicionar. */
+
+.selecao-tamanho-produto {
+    display: none;
+    width: 100%;
+    margin: 16px 0;
+    padding: 17px;
+    background: #f7faf5;
+    border: 1px solid #dce8d5;
+    border-radius: 13px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .06);
+    text-align: left;
+}
+
+.selecao-tamanho-produto.aberta {
+    display: block;
+    animation: aparecerSelecaoTamanho .25s ease;
+}
+
+@keyframes aparecerSelecaoTamanho {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.titulo-selecao-tamanho {
+    color: #333229;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.descricao-selecao-tamanho {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 13px;
+    line-height: 1.5;
+}
+
+.select-tamanho-produto {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 14px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #cbd8c4;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+.select-tamanho-produto:focus {
+    border-color: #7ed957;
+    box-shadow: 0 0 0 3px rgba(126, 217, 87, .2);
+}
+
+.botoes-tamanho-produto {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.botoes-tamanho-produto button {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color .2s, transform .2s;
+}
+
+/* Confirmar */
+
+.produto .botoes-tamanho-produto .botao-confirmar-tamanho {
+    background: #7ed957;
+    color: #26351f;
+}
+
+.produto .botoes-tamanho-produto .botao-confirmar-tamanho:hover {
+    background: #68bd43;
+    transform: translateY(-2px);
+}
+
+/* Cancelar */
+
+.produto .botoes-tamanho-produto .botao-cancelar-tamanho {
+    background: #454545;
+    color: #fff;
+}
+
+.produto .botoes-tamanho-produto .botao-cancelar-tamanho:hover {
+    background: #292929;
+    transform: translateY(-2px);
+}
+
+/* Ajustes para celular */
+
+@media (max-width: 400px) {
+    .selecao-tamanho-produto {
+        padding: 13px;
+    }
+
+    .botoes-tamanho-produto {
+        flex-direction: column;
+    }
+
+    .botoes-tamanho-produto button {
+        width: 100%;
+    }
+}
+/* =========================
+   MATÉRIAS-PRIMAS
+========================= */
+
+.secao-materias-primas {
+    margin-top: 45px;
+    padding: 35px;
+    background: #fff;
+    border-radius: 12px;
+    border-top: 6px solid #7ed957;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+}
+
+.secao-materias-primas h2,
+.secao-estrutura-impacto > h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 26px;
+}
+
+.subtitulo-materias {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.tabela-materias-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabela-materias {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.tabela-materias th,
+.tabela-materias td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.tabela-materias thead {
+    background: #7ed957;
+    color: #222;
+}
+
+.tabela-materias tbody tr:nth-child(even) {
+    background: #f5f5f5;
+}
+
+.tabela-materias tbody tr:hover {
+    background: #eef9e9;
+}
+
+.tabela-materias td:last-child,
+.tabela-materias th:last-child {
+    text-align: right;
+}
+
+.tabela-materias tfoot {
+    background: #e7f7df;
+    font-weight: bold;
+}
+
+.tabela-materias tfoot th {
+    border-top: 2px solid #7ed957;
+}
+
+/* =========================
+   ESTRUTURA E IMPACTO
+========================= */
+
+.secao-estrutura-impacto {
+    margin-top: 45px;
+    padding: 35px;
+    background: #fff;
+    border-radius: 12px;
+    border-top: 6px solid #7ed957;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+}
+
+.estrutura-marca {
+    max-width: 850px;
+    margin: 25px auto 35px;
+    padding: 25px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.estrutura-marca h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 21px;
+}
+
+.estrutura-marca p {
+    color: #555;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.impactos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card-impacto {
+    padding: 25px 20px;
+    background: #f7f7f7;
+    border-radius: 10px;
+    border-bottom: 5px solid #7ed957;
+    text-align: center;
+    transition: transform .3s, box-shadow .3s;
+}
+
+.card-impacto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, .12);
+}
+
+.card-impacto h3 {
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 19px;
+}
+
+.card-impacto p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVIDADE DAS NOVAS SEÇÕES
+========================= */
+
+@media (max-width: 650px) {
+    .secao-materias-primas,
+    .secao-estrutura-impacto {
+        padding: 22px 15px;
+        margin-top: 30px;
+    }
+
+    .secao-materias-primas h2,
+    .secao-estrutura-impacto > h2 {
+        font-size: 22px;
+    }
+
+    .tabela-materias th,
+    .tabela-materias td {
+        padding: 12px 9px;
+        font-size: 14px;
+    }
+
+    .impactos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .estrutura-marca {
+        padding: 20px;
+    }
+}
+
